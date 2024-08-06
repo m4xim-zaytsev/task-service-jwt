@@ -1,6 +1,7 @@
 package com.example.task_service_jwt.web.model.request;
 
 import com.example.task_service_jwt.entity.RoleType;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,10 +14,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class CreateUserRequest {
-
     private String username;
     private String email;
     private Set<RoleType> roles;
     private String password;
-
 }

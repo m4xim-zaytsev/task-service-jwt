@@ -9,6 +9,7 @@ import com.example.task_service_jwt.web.model.request.RefreshTokenRequest;
 import com.example.task_service_jwt.web.model.response.AuthResponse;
 import com.example.task_service_jwt.web.model.response.RefreshTokenResponse;
 import com.example.task_service_jwt.web.model.response.SimpleResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,7 +28,7 @@ public class AuthController {
     private final SecurityService securityService;
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse> authUser(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<AuthResponse> authUser(@RequestBody @Valid LoginRequest loginRequest){
         return ResponseEntity.ok(securityService.authenticateUser(loginRequest));
     }
 

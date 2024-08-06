@@ -6,8 +6,6 @@ import com.example.task_service_jwt.repository.UserRepository;
 import com.example.task_service_jwt.web.model.request.CreateTaskRequest;
 import com.example.task_service_jwt.web.model.response.TaskResponse;
 import com.example.task_service_jwt.web.model.response.TaskResponseList;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -18,7 +16,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {UserMapper.class})
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {UserMapper.class, ReviewMapper.class})
 public abstract class TaskMapper {
 
     @Autowired
@@ -27,7 +25,7 @@ public abstract class TaskMapper {
     @Mapping(target = "author", source = "authorId", qualifiedByName = "mapAuthor")
     @Mapping(target = "executor", source = "executorId", qualifiedByName = "mapExecutor")
     public abstract Task toTask(CreateTaskRequest createTaskRequest);
-
+    
     public abstract TaskResponse toTaskResponse(Task task);
 
     public TaskResponseList taskListToTaskListResponse(List<Task> tasks) {

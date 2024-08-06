@@ -34,6 +34,7 @@ dependencies {
 	implementation("javax.xml.bind:jaxb-api:2.3.1")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
 	implementation("org.mapstruct:mapstruct:1.5.3.Final")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")

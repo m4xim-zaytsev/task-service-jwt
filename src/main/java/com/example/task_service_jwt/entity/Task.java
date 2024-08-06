@@ -30,7 +30,7 @@ public class Task {
     private TaskPriority taskPriority;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
+    @JoinColumn(name = "author_id")
     private User author;
 
     @ManyToOne

@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,4 +19,5 @@ public class TaskResponse {
     private TaskPriority taskPriority;
     private UserResponse author;
     private UserResponse executor;
+    private List<ReviewResponse> reviews;
 }
