@@ -36,9 +36,12 @@ public class User {
     @Builder.Default
     private Set<RoleType> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Task> authoredTasks = new ArrayList<>();
 
-    @OneToMany(mappedBy = "executor",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "executor", fetch = FetchType.LAZY)
     private List<Task> executedTasks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Review> reviews = new ArrayList<>();
 }

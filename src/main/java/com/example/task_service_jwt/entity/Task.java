@@ -5,6 +5,8 @@ import lombok.*;
 import org.springframework.data.redis.core.index.Indexed;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,6 +36,9 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "executor_id")
     private User executor;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Review> reviews = new ArrayList<>();
 }
 
 
