@@ -57,6 +57,7 @@ public class SecurityService {
                 .token(jwtUtils.generateJwtToken(userDetails))
                 .refreshToken(refreshToken.getToken())
                 .username(userDetails.getUsername())
+                .email(userDetails.getEmail())
                 .roles(roles)
                 .build();
 

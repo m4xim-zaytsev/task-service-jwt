@@ -2,6 +2,7 @@ package com.example.task_service_jwt.web.handler;
 
 import com.example.task_service_jwt.exception.AlreadyExistException;
 import com.example.task_service_jwt.exception.EntityNotFoundException;
+import com.example.task_service_jwt.exception.IllegalAccessException;
 import com.example.task_service_jwt.exception.RefreshTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,11 @@ public class WebAppExceptionHandler {
 
     @ExceptionHandler(value =  RefreshTokenException.class)
     public ResponseEntity<ErrorResponseBody> refreshTokenExceptionHandler(RefreshTokenException ex, WebRequest webRequest){
+        return buildResponse(HttpStatus.FORBIDDEN,ex,webRequest);
+    }
+
+    @ExceptionHandler(value =  IllegalAccessException.class)
+    public ResponseEntity<ErrorResponseBody> illegalAccessExceptionHandler(IllegalAccessException ex, WebRequest webRequest){
         return buildResponse(HttpStatus.FORBIDDEN,ex,webRequest);
     }
 
