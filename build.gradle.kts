@@ -35,6 +35,7 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
 	implementation("org.mapstruct:mapstruct:1.5.3.Final")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.liquibase:liquibase-core")
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")
