@@ -30,33 +30,17 @@ public class TaskController {
     private final TaskService taskService;
     private final TaskMapper taskMapper;
 
-
-    @GetMapping("/filter-by")
-    public ResponseEntity<TaskResponseList> findByFilter(@Valid TaskFilter taskFilter) {
-        return ResponseEntity.ok(taskMapper.taskListToTaskListResponse(
-                taskService.findByFilter(taskFilter)
-        ));
-    }
-
-    @PutMapping("/status/{id}")
-    public ResponseEntity<TaskResponse> updateStatus(@PathVariable Long id, @RequestParam TaskStatus status,
-                                               @AuthenticationPrincipal UserDetails userDetails) {
-
-        Task updatedTask = taskService.updateStatus(status,id,userDetails);
-        return ResponseEntity.ok(taskMapper.toTaskResponse(updatedTask));
+    @PostMapping()
+    public ResponseEntity<TaskResponse> create(@AuthenticationPrincipal UserDetails userDetails,
+                                               @RequestBody @Valid CreateTaskRequest request){
+        Task createdTask = taskService.createTask(taskMapper.toTask(request),userDetails);
+        TaskResponse response = taskMapper.toTaskResponse(createdTask);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
     public ResponseEntity<TaskResponseList> getAll(){
         return ResponseEntity.ok(taskMapper.taskListToTaskListResponse(taskService.findAll()));
-    }
-
-    @PostMapping()
-    public ResponseEntity<TaskResponse> create(@AuthenticationPrincipal UserDetails userDetails,
-                                                   @RequestBody @Valid CreateTaskRequest request){
-        Task createdTask = taskService.createTask(taskMapper.toTask(request),userDetails);
-        TaskResponse response = taskMapper.toTaskResponse(createdTask);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
@@ -73,6 +57,27 @@ public class TaskController {
         taskService.delete(id,userDetails);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/filter-by")
+    public ResponseEntity<TaskResponseList> findByFilter(@Valid TaskFilter taskFilter) {
+        return ResponseEntity.ok(taskMapper.taskListToTaskListResponse(
+                taskService.findByFilter(taskFilter)
+        ));
+    }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<TaskResponse> updateStatus(@PathVariable Long id, @RequestParam TaskStatus status,
+                                               @AuthenticationPrincipal UserDetails userDetails) {
+
+        Task updatedTask = taskService.updateStatus(status,id,userDetails);
+        return ResponseEntity.ok(taskMapper.toTaskResponse(updatedTask));
+    }
+
+
+
+
+
+
 
 
 

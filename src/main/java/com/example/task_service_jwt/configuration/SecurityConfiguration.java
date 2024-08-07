@@ -51,6 +51,7 @@ public class SecurityConfiguration  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests((auth)-> auth.requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/app/**").permitAll()
+                        .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(configurer->configurer.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .csrf(AbstractHttpConfigurer::disable)

@@ -2,8 +2,6 @@ package com.example.task_service_jwt.web.model.request;
 
 import com.example.task_service_jwt.entity.TaskPriority;
 import com.example.task_service_jwt.entity.TaskStatus;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -28,9 +26,6 @@ public class CreateTaskRequest {
 
     @NotNull(message = "Task priority cannot be null")
     private TaskPriority taskPriority;
-
-    @NotBlank(message = "Author ID cannot be blank")
-    private String authorId;
 
     @NotBlank(message = "Executor ID cannot be blank")
     private String executorId;

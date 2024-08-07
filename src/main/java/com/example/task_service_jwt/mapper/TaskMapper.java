@@ -22,7 +22,6 @@ public abstract class TaskMapper {
     @Autowired
     private UserRepository userRepository;
 
-    @Mapping(target = "author", source = "authorId", qualifiedByName = "mapAuthor")
     @Mapping(target = "executor", source = "executorId", qualifiedByName = "mapExecutor")
     public abstract Task toTask(CreateTaskRequest createTaskRequest);
     
@@ -33,15 +32,6 @@ public abstract class TaskMapper {
                 .map(this::toTaskResponse)
                 .collect(Collectors.toList());
         return new TaskResponseList(taskResponses);
-    }
-
-    @Named("mapAuthor")
-    protected User mapAuthor(String authorId) {
-        if (authorId == null) {
-            throw new IllegalArgumentException("Author ID cannot be null");
-        }
-        return userRepository.findById(Long.valueOf(authorId))
-                .orElseThrow(() -> new RuntimeException("Author not found for ID: " + authorId));
     }
 
     @Named("mapExecutor")
